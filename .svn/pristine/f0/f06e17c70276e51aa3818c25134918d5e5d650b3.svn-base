@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create tour</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false" menuToggle></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <h3>Let's create your city tour in these simple steps!</h3>
+    <h5>Select a city and lets get started</h5>
+
+    <app-multi-step-form class="multi-step-form" 
+      [formContent]="formContent" 
+      (formSubmit)="onFormSubmit($event)"
+      >
+    </app-multi-step-form>
+
+  </div>
+
+</ion-content>

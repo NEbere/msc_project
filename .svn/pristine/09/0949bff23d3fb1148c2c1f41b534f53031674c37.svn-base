@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="row ion-padding">
+      <h5>{{userProfile.firstName}}, Ready to plan your next tour?</h5>
+    </div>
+
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <br>
+      <ion-item>
+        <ion-text>Share your travel preferences, by filling out a simple form!</ion-text>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-text>Tell us how long you will like to spend on each spot during your tour</ion-text>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-text>We generate an itinerary for a day tour in city of your choice!</ion-text>
+      </ion-item>
+    </ion-list>
+    <br>
+    <ion-button expand="block" class="btn-primary btn" (click)="goToCreateTour()">
+      Plan my tour
+    </ion-button>
+  </div>
+</ion-content>

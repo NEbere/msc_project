@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Tour Itinerary</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false" menuToggle></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container mt-5 mb-5" *ngIf="tourReady">
+  <!-- <div class="container mt-5 mb-5"> -->
+    <div class="row">
+      <div class="col-md-11 offset-md-1">
+        <h4>Tour Itinerary </h4>
+        <button class="btn" (click)="shareItinerary()">Share Itinerary</button>
+
+        <br>
+        <ul class="timeline">
+          <li *ngFor="let item of tourItinerary; index as index">
+            <ion-icon name="train"></ion-icon>
+            <a *ngIf="index != 0" target="_blank" href={{getDirectionsUrl(index,tourItinerary)}}>Get directions</a>
+            <h6>
+              <span *ngIf="item.label">{{item.label}} at</span>
+              <button class="btn place-detail" (click)="open(venueDetail)">{{item.venue.name}}</button>
+            </h6>
+
+            <!-- venue detail modal -->
+            <ng-template #venueDetail let-modal>
+              <div class="modal-header">
+                <h6 class="modal-title" id="modal-basic-title">Venue details</h6>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h5 class="modal-title" id="modal-basic-title">{{item.venue.name}}</h5>
+                <br>
+                <img class="card-img-top" src={{getImageUrl(item.photo)}} class="img-fluid" width="250" height="250"
+                  alt="">
+
+                <br>
+                <br>
+                <h5>Address:</h5>
+                <p>{{getFormattedAddress(item.venue.location.formattedAddress)}}</p>
+              </div>
+            </ng-template>
+          </li>
+        </ul>
+
+        <br>
+        <button class="btn" (click)="endTour()">End Tour</button>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+</ion-content>
+<br />

@@ -1,0 +1,14 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-tour-itenary',
+  templateUrl: './tour-itenary.component.html',
+  styleUrls: ['./tour-itenary.component.scss'],
+})
+export class TourItenaryComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {}
+
+}

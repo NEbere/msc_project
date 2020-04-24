@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="userProfileLoaded">
+  <div class="ion-padding">
+    <h3>Welcome {{userProfile.firstName}}</h3>
+  </div>
+</ion-content>
+
+
+<ion-content *ngIf="!userProfileLoaded">
+  <h3>loading</h3>
+</ion-content>

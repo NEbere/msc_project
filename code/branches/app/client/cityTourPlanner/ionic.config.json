@@ -1,0 +1,7 @@
+{
+  "name": "cityTourPlanner",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

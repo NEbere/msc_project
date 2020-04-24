@@ -1,0 +1,250 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create tour</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false" menuToggle></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container" *ngIf="!itenarnaryDraftGenerated && !tourItenaryGenerated">
+    <p class="text-warning" *ngIf="showWarning">Please select city</p>
+    <div>
+      <br />
+      <div class="form-group">
+        <label for="selectCity">Please select city</label>
+        <select class="form-control" id="selectCity" [(ngModel)]="city">
+          <option *ngFor="let city of cities" [value]="city.value">{{ city.name }}</option>
+        </select>
+      </div>
+    </div>
+    <p>What meals would you like to have on your tour</p>
+    <div *ngFor="let meal of mealOptions">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="meal.value" id="mealCheckbox" (change)="selectMeal(meal)"
+          [(ngModel)]="meal.selected">
+        <label class="form-check-label" for="mealCheckbox">
+          {{meal.name}}
+        </label>
+      </div>
+    </div>
+
+    <br>
+    <div>
+      <h6>What is important to you on your tour?</h6>
+      <p>Please select at least four</p>
+    </div>
+    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+      <!-- museum -->
+      <ngb-panel title="Museum">
+        <ng-template ngbPanelContent>
+          <p>What kind of museums do you like?</p>
+          <div *ngFor="let museumOption of museumOptions">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="museumOption.value" id="museumCheckbox"
+                (change)="updateTotalSelected(museumOption, 'museum')" [(ngModel)]="museumOption.selected">
+              <label class="form-check-label" for="museumCheckbox">
+                {{museumOption.name}}
+              </label>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <!-- entertainment -->
+      <ngb-panel title="Entertainment">
+        <ng-template ngbPanelContent>
+          <p>What would you like to do for entertainment?</p>
+          <div *ngFor="let entertainmentOption of entertainmentOptions">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="entertainmentOption.value"
+                id="entertainmentOptionCheckbox" [(ngModel)]="entertainmentOption.selected"
+                (change)="updateTotalSelected(entertainmentOption, 'entertainment')">
+              <label class="form-check-label" for="entertainmentOptionCheckbox">
+                {{entertainmentOption.name}}
+              </label>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <!-- food -->
+      <ngb-panel title="Food">
+        <ng-template ngbPanelContent>
+          <p>Where we bout to eat at?</p>
+          <div *ngFor="let foodOption of foodOptions">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="foodOption.value" id="foodOptionCheckbox"
+                (change)="updateTotalSelected(foodOption, 'food')" [(ngModel)]="foodOption.selected">
+              <label class="form-check-label" for="foodOptionCheckbox">
+                {{foodOption.name}}
+              </label>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <!-- Outdoor and Recreation -->
+      <ngb-panel title="Outdoor and Recreation">
+        <ng-template ngbPanelContent>
+          <p>Which outdoor and recreational activities interest you?</p>
+          <div *ngFor="let outdoorAndRecreationOption of outdoorsAndRecreationOptions">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="outdoorsAndRecreationOption.value"
+                id="outdoorsAndRecreationOptionCheckbox"
+                (change)="updateTotalSelected(outdoorAndRecreationOption, 'outdoorAndRecreation')"
+                [(ngModel)]="outdoorAndRecreationOption.selected">
+              <label class="form-check-label" for="outdoorsAndRecreationOptionCheckbox">
+                {{outdoorAndRecreationOption.name}}
+              </label>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <!-- shopping -->
+      <ngb-panel title="Shopping">
+        <ng-template ngbPanelContent>
+          <p>For shopping, I like:</p>
+          <div *ngFor="let shoppingOption of shoppingOptions">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="shoppingOption.value" id="shoppingOptionCheckbox"
+                (change)="updateTotalSelected(shoppingOption, 'shopping')" [(ngModel)]="shoppingOption.selected">
+              <label class="form-check-label" for="shoppingOptionCheckbox">
+                {{shoppingOption.name}}
+              </label>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <!-- performing arts -->
+      <ngb-panel title="Performing Arts">
+        <ng-template ngbPanelContent>
+          <p>I like thees forms of performing arts:</p>
+          <div *ngFor="let performingArtsOption of performingArtsOptions">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="performingArtsOption.value"
+                id="performingArtsOptionCheckbox" (change)="updateTotalSelected(performingArtsOption, 'performingArts')"
+                [(ngModel)]="performingArtsOption.selected">
+              <label class="form-check-label" for="performingArtsOptionCheckbox">
+                {{performingArtsOption.name}}
+              </label>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <!-- buildings -->
+      <ngb-panel title="Buildings">
+        <ng-template ngbPanelContent>
+          <p>For Buildings, I would like to see:</p>
+          <div *ngFor="let buildingsOption of buildingsOptions">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="buildingsOption.value"
+                id="buildingsOptionsCheckbox" (change)="updateTotalSelected(buildingsOption, 'buildings')"
+                [(ngModel)]="buildingsOption.selected">
+              <label class="form-check-label" for="buildingsOptionsOptionCheckbox">
+                {{buildingsOption.name}}
+              </label>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+    <br />
+    <button type="button" class="btn btn-primary" (click)="submitPreference(formData)" [disabled]="disableButton">
+      Create tour
+    </button>
+    <br />
+    <br />
+  </div>
+
+  <!-- When tour itenary draft is loaded from API -->
+  <div class="container" *ngIf="itenarnaryDraftGenerated">
+    <br>
+    <p class="text-warning" *ngIf="showWarning">How long will you lik to spend on each spot?</p>
+    <div>
+      <br />
+      <p *ngIf="noOfTourItemsToSelect == 0">
+        <mark>You have to select a time option to be able to select venues below</mark>
+      </p>
+      <p *ngIf="noOfTourItemsToSelect != 0">
+        <mark>You have to select {{noOfTourItemsToSelect}} venues below</mark>
+      </p>
+
+      <div class="form-group">
+        <label for="selectTime">Please select time for each spot</label>
+        <select class="form-control" id="selectTime" [(ngModel)]="time" (change)="updateSpotSelectionCount(time)">
+          <option *ngFor="let time of timeOptions" [value]="time.spotsCount">{{ time.name }}</option>
+        </select>
+      </div>
+    </div>
+    <!-- meal options selection -->
+    <p class="text-warning" *ngIf="showSelectMealWarning">Please select meals to create your itinerary</p>
+    <h5>Please select meal from the options below</h5>
+    <ngb-accordion #acc="ngbAccordion" activeIds="0">
+      <ngb-panel *ngFor="let meal of meals;index as index" id={{index}} [disabled]="disbaleAccordion">
+        <div *ngFor="let mealItems of meal | keyvalue">
+          <ng-template ngbPanelTitle>
+            <span>{{mealItems.key}}</span>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div *ngFor="let mealItem of mealItems.value">
+              <div class="form-check">
+                <h5>{{mealItem.venue.name}} - {{mealItem.venue.categories[0].name}}</h5>
+                <input class="form-check-input" type="radio" value={{mealItem.id}} id={{mealItems.key}}
+                  (change)="selectMealOption($event, mealItem, mealItems.key)" [(ngModel)]="mealItem.selected">
+                <label class="form-check-label" for={{mealItems.key}}>
+                  <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src={{getImageUrl(mealItem.photo)}} class="img-fluid" alt="">
+                    <div class="card-body">
+                      <h5 class="card-title">{{mealItem.venue.name}}</h5>
+                      <p class="card-text">
+                        <strong>Address:</strong>
+                        {{getFormattedAddress(mealItem.venue.location.formattedAddress)}}
+                      </p>
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <br>
+            </div>
+          </ng-template>
+        </div>
+        <br>
+      </ngb-panel>
+    </ngb-accordion>
+
+    <h5>Please select from the options below</h5>
+    <br>
+    <ngb-accordion #acc="ngbAccordion" activeIds="0">
+      <ngb-panel *ngFor="let draft of itenarnaryDraft;index as index" id={{index}} [disabled]="disbaleAccordion">
+        <ng-template ngbPanelTitle>
+          <span>{{draft.items[0].venue.categories[0].pluralName}}</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div *ngFor="let item of draft.items">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="item.venue.id" id="itenarnaryDraftItem"
+                (change)="updateSelectedDraftItems($event, item)">
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src={{getImageUrl(item.photo)}} class="img-fluid" alt="">
+                <div class="card-body">
+                  <h5 class="card-title">{{item.venue.name}}</h5>
+                  <p class="card-text">
+                    <strong>Address:</strong>
+                    {{getFormattedAddress(item.venue.location.formattedAddress)}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+
+    <br>
+    <button type="button" class="btn btn-primary" (click)="createTourItinerary()" [disabled]="disableCreateButton">
+      Create Itenary
+    </button>
+  </div>
+
+</ion-content>
+<br />

@@ -1,0 +1,67 @@
+{
+  "name": "loan-management-app-backend",
+  "version": "1.0.0",
+  "description": "Loan management application backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "lint": "standard",
+    "lint:fix": "yarn lint --fix",
+    "test:mocha": "cross-env NODE_ENV=test nyc mocha --timeout=10000 --exit --recursive",
+    "test:cover": "cross-env NODE_ENV=test yarn test:mocha \"test/**/*.test.js\"",
+    "test": "yarn lint && yarn test:cover",
+    "createDb": "node_modules/.bin/sequelize db:create",
+    "dropDb": "node_modules/.bin/sequelize db:drop",
+    "migrate": "node_modules/.bin/sequelize db:migrate",
+    "migrate:undo": "node_modules/.bin/sequelize db:migrate:undo",
+    "seedDb": "node_modules/.bin/sequelize db:seed:all"
+  },
+  "author": "Happiness Nwosu",
+  "license": "ISC",
+  "dependencies": {
+    "@turf/turf": "^5.1.6",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "chai-http": "^4.2.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "moneeda-node": "^1.1.1",
+    "mongoose-validator": "^2.1.0",
+    "nock": "^10.0.0",
+    "node-foursquare": "^0.4.6",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "pg": "^7.4.3",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5",
+    "response-time": "^2.3.2",
+    "sequelize": "^4.39.0",
+    "sequelize-cli": "^5.5.1"
+  },
+  "devDependencies": {
+    "chai": "4.1.2",
+    "cross-env": "5.1.0",
+    "faker": "4.1.0",
+    "mocha": "4.0.1",
+    "nodemon": "^1.19.4",
+    "nyc": "^14.1.1",
+    "sinon": "4.0.2",
+    "sinon-chai": "2.14.0",
+    "standard": "10.0.3",
+    "supertest": "3.0.0"
+  },
+  "standard": {
+    "env": [
+      "node",
+      "mocha",
+      "chai"
+    ],
+    "globals": [
+      "expect",
+      "sinon"
+    ]
+  }
+}

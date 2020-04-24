@@ -1,0 +1,71 @@
+<div>
+  <ion-header translucent>
+    <ion-toolbar>
+      <h3>City Tour PLanner</h3>
+      <p>Signin or create account to continue</p>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content fullscreen padding>
+    <!-- tabset -->
+    <ngb-tabset type="pills">
+      <ngb-tab title="Login">
+        <ng-template ngbTabContent>
+          <form #loginAdminForm="ngForm">
+            <ion-list lines="full" class="ion-no-margin ion-no-padding">
+              <ion-item>
+                <ion-label position="stacked">Email <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="email" [(ngModel)]="loginCredentials.email" name="email"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">Password<ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="Password" [(ngModel)]="loginCredentials.password" name="password"></ion-input>
+              </ion-item>
+            </ion-list>
+
+            <div class="ion-padding">
+              <ion-button expand="block" class="ion-no-margin" (click)="userLogin(loginCredentials)">
+                Login
+              </ion-button>
+            </div>
+          </form>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Create account">
+        <ng-template ngbTabContent>
+          <form #loginAdminForm="ngForm">
+            <ion-list lines="full" class="ion-no-margin ion-no-padding">
+              <ion-item>
+                <ion-label position="stacked">First name <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="text" [(ngModel)]="userAccountDetails.firstName" name="firstName"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Email <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="email" [(ngModel)]="userAccountDetails.email" name="email"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">Password<ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="Password" [(ngModel)]="userAccountDetails.password" name="password"></ion-input>
+              </ion-item>
+            </ion-list>
+
+            <div class="ion-padding">
+              <ion-button expand="block" class="ion-no-margin" (click)="createAccount(userAccountDetails)">
+                Creat account
+              </ion-button>
+            </div>
+          </form>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+
+
+  </ion-content>
+</div>
